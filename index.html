@@ -70,7 +70,7 @@
 <script>
 // ===== Рандомные фото без повторов =====
 let images = [
-    "https://i.ibb.co.com/7NnHXm2H/Whats-App-Image-2026-04-03-at-18-48-37.jpg?random=1",
+    "https://picsum.photos/500/300?random=1",
     "https://picsum.photos/500/300?random=2",
     "https://picsum.photos/500/300?random=3",
     "https://picsum.photos/500/300?random=4",
@@ -125,15 +125,15 @@ function showRandomFact() {
 }
 
 // ===== Мини-игра: Угадай число =====
-let secretNumber = Math.floor(Math.random() * 50) + 1;
+let secretNumber = Math.floor(Math.random() * 100) + 1;
 
 function checkGuess() {
     const guess = Number(document.getElementById('guess').value);
     const message = document.getElementById('gameMessage');
-    if(!guess) { message.textContent = "Введите число от 1 до 50."; return; }
+    if(!guess) { message.textContent = "Введите число от 1 до 100."; return; }
     if(guess === secretNumber) {
         message.textContent = `Поздравляем! Вы угадали число ${secretNumber}! Загадано новое число.`;
-        secretNumber = Math.floor(Math.random() * 50) + 1;
+        secretNumber = Math.floor(Math.random() * 100) + 1;
     } else if(guess < secretNumber) {
         message.textContent = "Слишком мало!";
     } else {
