@@ -50,15 +50,10 @@
 
 <section id="game">
     <h2>Мини-игра: Угадай число</h2>
-    <p>Я загадал число от 1 до 100. Попробуй угадать!</p>
-    <input type="number" id="guess" min="1" max="100">
+    <p>Я загадал число от 1 до 50. Попробуй угадать!</p>
+    <input type="number" id="guess" min="1" max="50">
     <button onclick="checkGuess()">Угадать</button>
     <p id="gameMessage"></p>
-
-    <!-- Пасхалки с локальным аудио -->
-    <audio id="meme67" src="meme67.mp3"></audio>
-    <audio id="meme52" src="meme52.mp3"></audio>
-    <audio id="meme21" src="meme21.mp3"></audio>
 </section>
 
 <section id="contact">
@@ -73,7 +68,7 @@
 </footer>
 
 <script>
-// ===== Рандомные фото =====
+// ===== Рандомные фото без повторов =====
 let images = [
     "https://picsum.photos/500/300?random=1",
     "https://picsum.photos/500/300?random=2",
@@ -99,7 +94,7 @@ function showRandomImage() {
     document.getElementById('imageContainer').innerHTML = `<img src="${img}" alt="Рандом фото">`;
 }
 
-// ===== Рандомные факты =====
+// ===== Рандомные факты/советы без повторов =====
 let facts = [
     "Факт: КДБШ в среднем за день 14 раз soset huy.",
     "Совет: Пей больше воды каждый день!",
@@ -113,7 +108,7 @@ let facts = [
     "Совет: Делай растяжку после сидячей работы.",
     "Факт: На Венере день длиннее года.",
     "Совет: Учись новому каждый день.",
-    "Факт: БекБек играет в кс лучше чем S1mple ZywOo m0nesy все вместе взятые.",
+    "Факт: БекБек играет в кс лучше чем S1mple ZywOo m0nesy donk666 все вместе взятые.",
     "Совет: Пиши дневник своих целей."
 ];
 let usedFacts = [];
@@ -129,26 +124,16 @@ function showRandomFact() {
     document.getElementById('factText').textContent = fact;
 }
 
-// ===== Мини-игра с пасхалками =====
-let secretNumber = Math.floor(Math.random() * 100) + 1;
+// ===== Мини-игра: Угадай число =====
+let secretNumber = Math.floor(Math.random() * 50) + 1;
 
 function checkGuess() {
     const guess = Number(document.getElementById('guess').value);
     const message = document.getElementById('gameMessage');
-    if(!guess || guess < 1 || guess > 100) { 
-        message.textContent = "Введите число от 1 до 100."; 
-        return; 
-    }
-
-    // Пасхалки с мемами
-    if(guess === 67) { document.getElementById('meme67').play(); }
-    if(guess === 52) { document.getElementById('meme52').play(); }
-    if(guess === 21) { document.getElementById('meme21').play(); }
-
-    // Проверка угадывания
+    if(!guess) { message.textContent = "Введите число от 1 до 50."; return; }
     if(guess === secretNumber) {
         message.textContent = `Поздравляем! Вы угадали число ${secretNumber}! Загадано новое число.`;
-        secretNumber = Math.floor(Math.random() * 100) + 1;
+        secretNumber = Math.floor(Math.random() * 50) + 1;
     } else if(guess < secretNumber) {
         message.textContent = "Слишком мало!";
     } else {
