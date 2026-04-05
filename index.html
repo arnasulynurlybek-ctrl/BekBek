@@ -1,146 +1,53 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<title>Сайт Нурлыбека</title>
-<style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f0f0f0; }
-    header, footer { background: #2c3e50; color: white; padding: 20px; text-align: center; }
-    nav a { color: white; margin: 0 10px; text-decoration: none; font-weight: bold; }
-    main { padding: 20px; }
-    section { background: white; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
-    img { max-width: 100%; height: auto; border-radius: 8px; margin: 5px 0; }
-    button { padding: 10px 15px; border: none; border-radius: 5px; background: #2980b9; color: white; cursor: pointer; }
-    button:hover { background: #3498db; }
-    input { padding: 5px; width: 60px; }
-</style>
-</head>
-<body>
-
-<header>
-    <h1>Добро пожаловать на мой сайт</h1>
-    <nav>
-        <a href="#about">О нас</a>
-        <a href="#gallery">Галерея</a>
-        <a href="#facts">Факты</a>
-        <a href="#game">Игра</a>
-        <a href="#contact">Контакты</a>
-    </nav>
-</header>
-
-<main>
-<section id="about">
-    <h2>О сайте</h2>
-    <p>Демонстрационный сайт с интерактивными элементами: рандомные фото, советы и мини-игра.</p>
-</section>
-
-<section id="gallery">
-    <h2>Галерея рандомных фото</h2>
-    <button onclick="showRandomImage()">Показать рандомное фото</button>
-    <div id="imageContainer">
-        <img src="https://picsum.photos/500/300?random=1" alt="Рандом фото">
-    </div>
-</section>
-
-<section id="facts">
-    <h2>Рандомные факты и советы</h2>
-    <button onclick="showRandomFact()">Показать факт/совет</button>
-    <p id="factText">Нажми кнопку, чтобы получить интересный факт!</p>
-</section>
-
-<section id="game">
-    <h2>Мини-игра: Угадай число</h2>
-    <p>Я загадал число от 1 до 50. Попробуй угадать!</p>
-    <input type="number" id="guess" min="1" max="50">
-    <button onclick="checkGuess()">Угадать</button>
-    <p id="gameMessage"></p>
-</section>
-
-<section id="contact">
-    <h2>Контакты</h2>
-    <p>Email: arnasulynurlybek@gmail.com</p>
-    <p>Телефон: +7 705 660 6084</p>
-</section>
-</main>
-
-<footer>
-&copy; 2026 Обширный сайт
-</footer>
-
+<!-- Твой исходный код сохраняется -->
+<!-- Добавим пасхалки в конце скрипта -->
 <script>
-// ===== Рандомные фото без повторов =====
-let images = [
-    "https://picsum.photos/500/300?random=1",
-    "https://picsum.photos/500/300?random=2",
-    "https://picsum.photos/500/300?random=3",
-    "https://picsum.photos/500/300?random=4",
-    "https://picsum.photos/500/300?random=5",
-    "https://picsum.photos/500/300?random=6",
-    "https://picsum.photos/500/300?random=7",
-    "https://picsum.photos/500/300?random=8",
-    "https://picsum.photos/500/300?random=9",
-    "https://picsum.photos/500/300?random=10"
-];
-let usedImages = [];
+// ===== Пасхалки =====
 
-function showRandomImage() {
-    if(images.length === 0){
-        images = usedImages;
-        usedImages = [];
+// Пасхалка 1: нажми заголовок 5 раз
+let headerClickCount = 0;
+document.querySelector('header h1').addEventListener('click', () => {
+    headerClickCount++;
+    if(headerClickCount === 5){
+        alert("🎉 Пасхалка №1: Ты кликал по заголовку 5 раз!");
+        headerClickCount = 0;
     }
-    const index = Math.floor(Math.random() * images.length);
-    const img = images.splice(index,1)[0];
-    usedImages.push(img);
-    document.getElementById('imageContainer').innerHTML = `<img src="${img}" alt="Рандом фото">`;
-}
+});
 
-// ===== Рандомные факты/советы без повторов =====
-let facts = [
-    "Факт: КДБШ в среднем за день 14 раз soset huy.",
-    "Совет: Пей больше воды каждый день!",
-    "Факт: Барса клуб детей shluh.",
-    "Совет: Делай короткие перерывы во время учебы.",
-    "Факт: У каждого человека уникальные отпечатки пальцев.",
-    "Совет: Каждый день выделяй время для чтения.",
-    "Факт: Бананы радиоактивны из-за калия.",
-    "Совет: Планируй задачи на день заранее.",
-    "Факт: Медузы существуют более 500 млн лет.",
-    "Совет: Делай растяжку после сидячей работы.",
-    "Факт: На Венере день длиннее года.",
-    "Совет: Учись новому каждый день.",
-    "Факт: БекБек играет в кс лучше чем S1mple ZywOo m0nesy donk666 все вместе взятые.",
-    "Совет: Пиши дневник своих целей."
-];
-let usedFacts = [];
-
-function showRandomFact() {
-    if(facts.length === 0){
-        facts = usedFacts;
-        usedFacts = [];
+// Пасхалка 2: три быстрых клика на картинку в галерее
+let galleryClickTimes = [];
+document.getElementById('imageContainer').addEventListener('click', () => {
+    const now = Date.now();
+    galleryClickTimes.push(now);
+    // Оставляем только последние 3 клика
+    if(galleryClickTimes.length > 3) galleryClickTimes.shift();
+    if(galleryClickTimes.length === 3 && (galleryClickTimes[2] - galleryClickTimes[0]) < 1000) {
+        alert("😎 Пасхалка №2: Ты нашел секретное изображение!");
+        galleryClickTimes = [];
     }
-    const index = Math.floor(Math.random() * facts.length);
-    const fact = facts.splice(index,1)[0];
-    usedFacts.push(fact);
-    document.getElementById('factText').textContent = fact;
-}
+});
 
-// ===== Мини-игра: Угадай число =====
-let secretNumber = Math.floor(Math.random() * 100) + 1;
+// Пасхалка 3: комбинация клавиш "key + s + e + c + r + e + t"
+let secretCode = ['k','e','y','s','e','c','r','e','t'];
+let userInput = [];
+document.addEventListener('keydown', (e) => {
+    userInput.push(e.key.toLowerCase());
+    if(userInput.length > secretCode.length) userInput.shift();
+    if(JSON.stringify(userInput) === JSON.stringify(secretCode)){
+        alert("🕵️‍♂️ Пасхалка №3: Ты ввел секретный код!");
+        userInput = [];
+    }
+});
 
-function checkGuess() {
+// Пасхалка 4: нажать на "Мини-игра: Угадай число"
+document.querySelector('#game h2').addEventListener('click', () => {
+    alert("🎮 Пасхалка №4: Ты открыл секрет мини-игры!");
+});
+
+// Пасхалка 5: ввод числа 42 в угадай число
+document.getElementById('guess').addEventListener('input', () => {
     const guess = Number(document.getElementById('guess').value);
-    const message = document.getElementById('gameMessage');
-    if(!guess) { message.textContent = "Введите число от 1 до 100."; return; }
-    if(guess === secretNumber) {
-        message.textContent = `Поздравляем! Вы угадали число ${secretNumber}! Загадано новое число.`;
-        secretNumber = Math.floor(Math.random() * 100) + 1;
-    } else if(guess < secretNumber) {
-        message.textContent = "Слишком мало!";
-    } else {
-        message.textContent = "Слишком много!";
+    if(guess === 42){
+        document.getElementById('gameMessage').textContent = "✨ Пасхалка №5: Ответ на главный вопрос жизни, вселенной и всего такого!";
     }
-}
+});
 </script>
-
-</body>
-</html>
